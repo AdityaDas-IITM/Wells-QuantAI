@@ -14,6 +14,8 @@
 ### Correlation Between Different Moneyness
 
 As you can see from the image below we observe that there is a correlation between the volatility values for different moneyness values. One kind of trend is followed for all Moneyness values less than 1 and a different one is followed for all moneyness values greater than 1.
+
+
 ![](Assets/Moneyness_2M.png)
 
 ### Model Architecture
@@ -33,8 +35,34 @@ Below shown is an image of what the architecture looks like:
 ### Creating Positional Embeddings for the Dates
 - Positional embedding of an element is proportional to difference between its date and the date of the first element in the input sequence. 
 - This Accounts for any turbulence on weekends and other market-closed days leading to abrupt changes in price.
+
 ![](Assets/Positional_Embeddings.png)
 
 ### Our Loss Function
 The Loss function is a combination of RMSE, temporal continuity and spatial loss. (All of which we explain subsequently).
+
 ![](Assets/Loss_fns.png)
+
+### Temporal Continuity
+This minimises the difference in IV values as time evolves to prevent any erratic predictions. For this, the L1 loss between consecutive predictions were minimised.
+
+![](Assets/Temporal_loss.png)
+
+### Spatial Loss
+We Introduce a spatial loss so that the final IV surface was free of any unexpected spikes. For this, the gradient of the predicted IV surface is computed and minimised.
+
+![](Assets/Spatial_Loss.png)
+
+### Teacher Forcing
+To stabilise the training, teacher forcing was introduced. In the decoder, randomly the ground truth values of the current time step were used as an input for the next time step instead of the predicted values.  If not enforced, a single bad prediction could cascade to bigger failures leading to highly unstable training.
+
+![](Assets/Teacher_Forcing.png)
+
+### Prediction Method - Rolling Window
+The input to the model is a window of size W and the GRU predicts the next K days. K<W is maintained so that the weights of the context vector has enough information to have a reasonable distribution over the input window.
+
+The input window is then translated by K steps and this forms the new input. The same process repeats. The missing days in the prediction template is accounted for in the positional embedding scheme explained previously.
+
+![](Assets/Sliding_Window.png)
+                                                                                       
+### Results - Predictions
