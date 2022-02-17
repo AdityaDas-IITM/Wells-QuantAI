@@ -26,11 +26,15 @@ As you can see from the image below we observe that there is a correlation betwe
 - Weights calculated conditional on current hidden state of the GRU and the encoder outputs. This setup allows us to have a large input sequence sizes.
 
 Below shown is an image of what the architecture looks like:
-![](Assets/Model.png)
-
-### Our Loss Function
+<p align="center">
+  <img src="https://github.com/AdityaDas-IITM/Wells-QuantAI/blob/main/Assets/Model.png" />
+</p>
 
 ### Creating Positional Embeddings for the Dates
 - Positional embedding of an element is proportional to difference between its date and the date of the first element in the input sequence. 
 - This Accounts for any turbulence on weekends and other market-closed days leading to abrupt changes in price.
 ![](Assets/Positional_Embeddings.png)
+
+### Our Loss Function
+The Loss function is a combination of RMSE, temporal continuity and spatial loss. (All of which we explain subsequently).
+![](Assets/Loss_fns.png)
