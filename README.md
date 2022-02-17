@@ -66,3 +66,29 @@ The input window is then translated by K steps and this forms the new input. The
 ![](Assets/Sliding_Window.png)
                                                                                        
 ### Results - Predictions
+These are some of the graphs that we plotted as the results from our model.
+
+![](Assets/Preds.png)
+                       
+### Model Selection and Tuning
+#### Models we tried –
+- ARIMA – bad training losses
+- Vanilla LSTM
+- LSTM + Attention – Our 2nd best – 0.0199
+- Self attention Enc + GRU Dec – Our best – 0.01947
+- Applying Moving Averages – Did not give fine-grained patterns, increasing loss
+
+#### Hyperparams optimized –
+- Batch size – 64 (best), 128 
+- Window lengths – input 50 days, output 10 days
+- Enc/Dec no. of hidden dims, layers
+- Teacher Forcing ratio
+- Custom Loss weights
+
+### Time, Memory and Unique Features
+- Training Time – 15 mins total on Google Colab GPU
+- Memory Usage – 50 MB for state dictionary
+- Our model is unique – supports any input window size for the same number of parameters
+- Can predict any number of days into the future, tunable parameter
+- Deep learning – can generate non-linear decision boundaries, hence adapt to more complicated patterns
+                                                                                       
