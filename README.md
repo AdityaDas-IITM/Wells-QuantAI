@@ -3,7 +3,7 @@
 ### Team Third Degree Burn's Solution to the [Wells Fargo Quant AI Hack](https://dare2compete.com/hackathon/wells-fargo-quantitative-ai-hackathon-shaastra-2022-indian-institute-of-technology-iit-madras-248431)
 
 ## Brief Solution
-We approached the problem of predicting Implied Volatility values for different moneyness and tenor values in the future, given historical data, using a multi headed transformer architecture with a few modifications (Like Positional Embeddings, Teacher Forcing etc). We also defined our own loss function which ensured temporal as well as spatial consistency in the final predicted Implied Volatility values. For a detailed Solution outline, continue reading this Readme!
+We approached the problem of predicting Implied Volatility values for different moneyness and tenor values in the future, given historical data, using a multi headed self attention as the encoder and a GRU layer as the decoder with a few modifications (Like Positional Embeddings, Teacher Forcing etc). We also defined our own loss function which ensured temporal as well as spatial consistency in the final predicted Implied Volatility values. For a detailed Solution outline, continue reading this Readme!
 
 [Link to our Code File for Training](https://nbviewer.org/github/AdityaDas-IITM/Wells-QuantAI/blob/main/Wells_QuantAI_Transformer_Encoder_With_Plots.ipynb)
 
